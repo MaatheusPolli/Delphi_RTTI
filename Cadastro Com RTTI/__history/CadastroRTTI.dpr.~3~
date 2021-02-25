@@ -1,0 +1,18 @@
+program CadastroRTTI;
+
+uses
+  Vcl.Forms,
+  un_frmCadRTTI in 'un_frmCadRTTI.pas' {frm_principal_cadRTTI},
+  un_cliente in 'un_cliente.pas',
+  un_funcoes in 'un_funcoes.pas',
+  UnitClass.Validador in 'UnitClass.Validador.pas',
+  UnitClass.CustomAttributes in 'UnitClass.CustomAttributes.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tfrm_principal_cadRTTI, frm_principal_cadRTTI);
+  Application.Run;
+end.
