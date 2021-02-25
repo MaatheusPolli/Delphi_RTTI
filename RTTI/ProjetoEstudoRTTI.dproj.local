@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/02/09 21:26:28.000.086,=C:\Users\mapol\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/09 21:27:02.000.249,C:\Git\Estudos Delphi\RTTI\un_principal.dfm=C:\Users\mapol\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2021/02/09 21:27:02.000.249,C:\Git\Estudos Delphi\RTTI\un_principal.pas=C:\Users\mapol\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/09 21:27:35.000.613,C:\Git\Estudos Delphi\RTTI\ProjetoEstudoRTTI.dproj=C:\Users\mapol\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/02/09 21:30:16.000.546,=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+    <Transaction>2021/02/09 21:30:34.000.287,C:\Git\Estudos Delphi\RTTI\un_TCliente.pas=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+    <Transaction>2021/02/10 21:09:34.000.102,=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+    <Transaction>2021/02/10 21:09:56.000.192,C:\Git\Estudos Delphi\RTTI\Unit1.pas=C:\Git\Estudos Delphi\RTTI\un_CustomAttributes.pas</Transaction>
+    <Transaction>2021/02/11 21:40:09.000.621,=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+    <Transaction>2021/02/11 21:41:23.000.346,C:\Git\Estudos Delphi\RTTI\un_cliente.factory.pas=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+    <Transaction>2021/02/11 21:58:51.000.665,=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+    <Transaction>2021/02/11 22:01:05.000.653,C:\Git\Estudos Delphi\RTTI\Un_validaCustom.pas=C:\Git\Estudos Delphi\RTTI\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
