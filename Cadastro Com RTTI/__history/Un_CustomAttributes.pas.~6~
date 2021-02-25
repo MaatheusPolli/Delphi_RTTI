@@ -1,0 +1,91 @@
+unit Un_CustomAttributes;
+
+interface
+
+uses
+  RTTI, System.TypInfo;
+
+type
+  ATabela = class(TCustomAttribute)
+  private
+    FNomeTabela: String;
+  public
+    constructor Create(nomeTabela: String);
+    property NomeTabela: String read FNomeTabela write FNomeTabela;
+  end;
+
+  ACampo = class(TCustomAttribute)
+  private
+    FNomeDB: String;
+    FNomeDisplay: String;
+  public
+    constructor Create(nomeDB: String);
+    property NomeDB: String read FNomeDB write FNomeDB;
+  end;
+
+  APK = class(TCustomAttribute)
+  end;
+
+  ANotNull = class(TCustomAttribute)
+  end;
+
+  AFormato = class(TCustomAttribute)
+  private
+    FTamanho: integer;
+    FPrecisao: integer;
+    FMascara: string;
+    function getTamanhoTotal: integer;
+  public
+    property Tamanho: integer read FTamanho write FTamanho;
+    property Precisao: integer read FPrecisao write FPrecisao;
+    property Mascara: string read FMascara write FMascara;
+    function getMascaraNumerica: String;
+    constructor Create(tamanho: integer; precisao: integer = 0);overload;
+    constructor Create(mascara: string);overload;
+  end;
+
+implementation
+
+{ ACampo }
+
+constructor ACampo.Create(nomeDB: String);
+begin
+  FNomeDB := nomeDB;
+end;
+
+{ ATabela }
+
+constructor ATabela.Create(nomeTabela: String);
+begin
+  FNomeTabela := nomeTabela;
+end;
+
+{ AFormato }
+
+constructor AFormato.Create(tamanho, precisao: integer);
+begin
+  FTamanho  := Tamanho;
+  FPrecisao := Precisao;
+end;
+
+constructor AFormato.Create(mascara: string);
+begin
+  FMascara := Mascara;
+end;
+
+function AFormato.getMascaraNumerica: String;
+var
+  sTamanho, sPrecisao: string;
+begin
+  sTamanho  :=StringOfChar('0',FTamanho-FPrecisao);
+  sPrecisao :=StringOfChar('0',FPrecisao);
+
+  Result:=sTamanho+'.'+sPrecisao;
+end;
+
+function AFormato.getTamanhoTotal: integer;
+begin
+  Result:=FTamanho-FPrecisao;
+end;
+
+end.
