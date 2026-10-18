@@ -1,4 +1,4 @@
-program ProjetoEstudoRTTI;
+﻿program ProjetoEstudoRTTI;
 
 uses
   Vcl.Forms,

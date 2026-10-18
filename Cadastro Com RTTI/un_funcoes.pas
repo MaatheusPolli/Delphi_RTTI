@@ -1,4 +1,4 @@
-unit un_funcoes;
+Ôªøunit un_funcoes;
 
 interface
 
@@ -44,13 +44,13 @@ begin
       componente:=Formulario.Components[I];
       if String(componente.Name).Contains(RttiProp.Name) then
       begin
-        //valida qual tipo È pra obter retorno
+        //valida qual tipo √© pra obter retorno
         case RttiProp.GetValue(classe).Kind of
           tkUString: Value:= RetornarTextoDoComponente(componente);
           tkInteger: Value:= StrToInt(RetornarTextoDoComponente(componente));
           tkFloat:   Value:= StrToFloat(RetornarTextoDoComponente(componente));
         end;
-        //List1 t· com propriedade ReadOnly
+        //List1 t√° com propriedade ReadOnly
         if RttiProp.IsWritable then
           RttiProp.SetValue(Classe, Value);
       end;

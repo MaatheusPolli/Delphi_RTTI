@@ -1,0 +1,19 @@
+# Planejamento local: nunca versionar
+planejamento.md
+
+# Compilados e arquivos gerados pelo Delphi
+*.dcu
+*.identcache
+*.dproj.local
+*.dres
+__history/
+__recovery/
+Win32/
+Win64/
+
+# Binarios de terceiros (libmysql, dbxmys): instale-os localmente
+*.dll
+*.dylib
+
+# Credenciais locais
+config.ini

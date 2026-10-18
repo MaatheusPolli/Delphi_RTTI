@@ -1,4 +1,4 @@
-unit Un_validaCustom;
+Ôªøunit Un_validaCustom;
 
 interface
 
@@ -26,7 +26,7 @@ var
   Atributo : TObject;
 begin
   Contexto := TRTTIContext.Create;
-  //Descobre qual È a classe/tipo
+  //Descobre qual √© a classe/tipo
   Tipo     := Contexto.GetType(Classe.ClassType);
 
   e.Add(tipo.Name);
@@ -39,7 +39,7 @@ begin
     e.Add('Propriedade: ' + Proper.Name +' = '+ Proper.GetValue(Classe).ToString);
 
 
-    {ApÛs pegar a propriedade posso acessar seus atributos, È onde ser·
+    {Ap√≥s pegar a propriedade posso acessar seus atributos, √© onde ser√°
     validado os CustomAtt;}
     for Atributo in Proper.GetAttributes do
     begin
@@ -47,9 +47,9 @@ begin
       begin
         if (Proper.GetValue(Classe).ToString = '') or
            (Proper.GetValue(Classe).ToString = '0') then
-          e.Add('       *Campo ObrigatÛrio* - Resultado: N„o informado')
+          e.Add('       *Campo Obrigat√≥rio* - Resultado: N√£o informado')
         else
-          e.Add('       *Campo ObrigatÛrio* - Resultado: Informado');
+          e.Add('       *Campo Obrigat√≥rio* - Resultado: Informado');
       end;
 
       if Atributo.ClassType = DefineIntervaloAceito then

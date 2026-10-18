@@ -1,4 +1,4 @@
-unit UN_Validador;
+Ôªøunit UN_Validador;
 
 interface
 
@@ -31,13 +31,13 @@ begin
     if propriedade.getAttribute(ANotNull)<> nil then
     begin
       if (propriedade.GetValue(classe).ToString = '') then
-          e.Add('O Campo '+ propriedade.Name+' N„o foi informado!');
+          e.Add('O Campo '+ propriedade.Name+' N√£o foi informado!');
 
       if (propriedade.GetValue(classe).ToString = '0') then
-        e.Add('O Campo '+ propriedade.Name+' N„o pode ser Zero!');
+        e.Add('O Campo '+ propriedade.Name+' N√£o pode ser Zero!');
 
       if (propriedade.GetValue(classe).ToString = '30/12/1899') then
-        e.Add('… obrigatÛrio informar uma data v·lida para '+propriedade.Name);
+        e.Add('√â obrigat√≥rio informar uma data v√°lida para '+propriedade.Name);
     end;
   end;
 end;

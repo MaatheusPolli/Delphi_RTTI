@@ -13,6 +13,7 @@ object frm_principal_cadRTTI: Tfrm_principal_cadRTTI
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -160,46 +161,21 @@ object frm_principal_cadRTTI: Tfrm_principal_cadRTTI
     ParentFont = False
     TabOrder = 1
   end
-  object SQLConn: TSQLConnection
-    ConnectionName = 'MySQLConnection'
-    DriverName = 'MySQL'
-    LoginPrompt = False
+  object SQLConn: TFDConnection
     Params.Strings = (
-      'DriverUnit=Data.DBXMySQL'
-      
-        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver260.' +
-        'bpl'
-      
-        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
-        'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
-        'eyToken=91d62ebb5b0d1b1b'
-      
-        'MetaDataPackageLoader=TDBXMySqlMetaDataCommandFactory,DbxMySQLDr' +
-        'iver260.bpl'
-      
-        'MetaDataAssemblyLoader=Borland.Data.TDBXMySqlMetaDataCommandFact' +
-        'ory,Borland.Data.DbxMySQLDriver,Version=24.0.0.0,Culture=neutral' +
-        ',PublicKeyToken=91d62ebb5b0d1b1b'
-      'GetDriverFunc=getSQLDriverMYSQL'
-      'LibraryName=dbxmys.dll'
-      'LibraryNameOsx=libsqlmys.dylib'
-      'VendorLib=LIBMYSQL.dll'
-      'VendorLibWin64=libmysql.dll'
-      'VendorLibOsx=libmysqlclient.dylib'
-      'MaxBlobSize=-1'
-      'DriverName=MySQL'
-      'HostName=localhost'
+      'DriverID=MySQL'
+      'Server=localhost'
       'Database=banco_rtti'
-      'User_Name=root'
-      'ServerCharSet='
-      'BlobSize=-1'
-      'ErrorResourceFile='
-      'LocaleCode=0000'
-      'Compressed=False'
-      'Encrypted=False'
-      'ConnectTimeout=60'
-      'Password=')
+      'User_Name='
+      'Password='
+      'CharacterSet=utf8mb4')
+    LoginPrompt = False
     Left = 448
     Top = 160
+  end
+  object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
+    VendorLib = 'libmysql.dll'
+    Left = 448
+    Top = 220
   end
 end

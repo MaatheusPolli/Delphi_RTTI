@@ -1,4 +1,4 @@
-program CadastroRTTI;
+﻿program CadastroRTTI;
 
 uses
   Vcl.Forms,
@@ -8,7 +8,8 @@ uses
   Un_CustomAttributes in 'Un_CustomAttributes.pas',
   Un_Helper.RTTI in 'Un_Helper.RTTI.pas',
   Un_Validador in 'Un_Validador.pas',
-  un_persistenciaDados in 'un_persistenciaDados.pas';
+  un_persistenciaDados in 'un_persistenciaDados.pas',
+  un_sqlBuilder in 'un_sqlBuilder.pas';
 
 {$R *.res}
 

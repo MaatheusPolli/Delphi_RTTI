@@ -45,17 +45,20 @@ A tela de cadastro não escreve SQL. Ela entrega o objeto para `un_persistenciaD
 ## Como rodar
 
 1. Crie o banco `banco_rtti` no MySQL usando o script em `Cadastro Com RTTI/Banco de Dados/`.
-2. Ajuste a conexão (host, usuário e senha) no componente de conexão de `un_frmCadRTTI.dfm`.
-3. Abra `CadastroRTTI.dproj` no Delphi (10.x ou mais novo) e execute. As DLLs `dbxmys.dll` e `libmysql.dll` precisam estar ao lado do executável.
+2. Copie `config.example.ini` para `config.ini` ao lado do executável e preencha host, banco, usuário e senha. O `config.ini` não é versionado.
+3. Abra `CadastroRTTI.dproj` no Delphi (10.4 ou mais novo) e execute. A DLL `libmysql.dll` precisa estar ao lado do executável (não é versionada).
 
-## Pendências conhecidas
+## Segurança
 
-- O SQL é montado por concatenação de valores. Ele precisa ser trocado por parâmetros (risco de SQL injection).
-- O repositório versiona arquivos compilados (`*.dcu`, `*.identcache`) e DLLs.
+Todos os valores vão para o SQL por parâmetro (`:campo`). Só nomes de tabela e colunas, vindos dos atributos, entram no texto do SQL.
 
 ## Tecnologias
 
-Delphi (VCL), RTTI (`System.Rtti`), dbExpress e MySQL.
+Delphi (VCL), RTTI (`System.Rtti`), FireDAC e MySQL.
+
+## Testes
+
+Suíte DUnitX em `tests/` (geração de SQL e validador). Compile `tests/Tests.dpr` com `Cadastro Com RTTI` no Search Path.
 
 ## Licença
 

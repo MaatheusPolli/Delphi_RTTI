@@ -1,4 +1,4 @@
-unit un_cliente.factory;
+Ôªøunit un_cliente.factory;
 
 interface
 
@@ -21,8 +21,8 @@ uses
 
 class function TClienteFactory.PreencherListagemDeClientes: TListaClientes;
 begin
-  {Crio um lista GenÈrica (<>) inidca isso
-   Dentro <InformoTipo> passo o tipo do objeto que pertencer· a lista, fazendo casting. }
+  {Crio um lista Gen√©rica (<>) inidca isso
+   Dentro <InformoTipo> passo o tipo do objeto que pertencer√° a lista, fazendo casting. }
   Result := Tlist<TClasseCliente>.Create;
 
   { Crio e preencho 1 cliente

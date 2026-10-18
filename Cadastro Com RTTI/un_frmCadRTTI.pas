@@ -1,4 +1,4 @@
-unit un_frmCadRTTI;
+ï»¿unit un_frmCadRTTI;
 
 interface
 
@@ -7,7 +7,8 @@ uses
   System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Data.DB, Vcl.StdCtrls, Datasnap.DBClient, Vcl.Grids,
-  Vcl.DBGrids, Data.SqlExpr, Data.DBXMySQL, FireDAC.Stan.Intf,
+  Vcl.DBGrids, FireDAC.Stan.Intf, FireDAC.Comp.Client,
+  FireDAC.Phys.MySQL, System.IniFiles,
 
   un_cliente,
   un_funcoes,
@@ -27,7 +28,8 @@ type
     Label3: TLabel;
     Label2: TLabel;
     Label5: TLabel;
-    SQLConn: TSQLConnection;
+    SQLConn: TFDConnection;
+    FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink;
     Peso: TEdit;
     Idade: TEdit;
     StringGrid: TStringGrid;
@@ -47,7 +49,8 @@ type
     //Lista declarada na Unit do Cliente
     FClientes : TClientes;
 
-    TDados   : TPersistencia;
+    TDados   : TPersistencia<TCliente>;
+    procedure FormDestroy(Sender: TObject);
     procedure atualizaGrid(selRow: integer  = 1);
     function  getRegistroFromClienteList(LinhaGrid: Integer): TCliente;
     procedure LimparTela;
@@ -86,7 +89,7 @@ begin
     TValidador.validarClasse(Cliente, ListBox1.Items);
 
     if ListBox1.Items.Count > 0 then
-      raise Exception.Create('Erros na Validação foram encontrados');
+      raise Exception.Create('Erros na ValidaÃ§Ã£o foram encontrados');
 
     //Comando Insert
     if not FEditando then
@@ -94,14 +97,13 @@ begin
     else
       TDados.Edit(Cliente);
 
-//  TDados.GetListDaBase();
-    TDados.GetListDaBase<TCliente>(FClientes);
+    TDados.GetListDaBase(FClientes);
     atualizaGrid;
 
     ShowMessage('Gravado com Sucesso!');
     LimparTela;
   except
-    ShowMessage('Não foi possível Gravar...');
+    ShowMessage('NÃ£o foi possÃ­vel Gravar...');
     Cliente.Free;
   end;
 end;
@@ -127,16 +129,40 @@ begin
 end;
 
 procedure Tfrm_principal_cadRTTI.FormCreate(Sender: TObject);
+var
+  Ini: TIniFile;
 begin
+  //Conexao configurada em config.ini (ao lado do executavel, nao versionado)
+  Ini := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'config.ini');
+  try
+    SQLConn.Params.Server   := Ini.ReadString('MySQL', 'Host', 'localhost');
+    SQLConn.Params.Database := Ini.ReadString('MySQL', 'Database', 'banco_rtti');
+    SQLConn.Params.UserName := Ini.ReadString('MySQL', 'Usuario', 'root');
+    SQLConn.Params.Password := Ini.ReadString('MySQL', 'Senha', '');
+  finally
+    Ini.Free;
+  end;
+
   //Crio Lista de Clientes
   FClientes := TClientes.Create;
-  TDados    := TPersistencia.Create(SQLConn);
+  TDados    := TPersistencia<TCliente>.Create(SQLConn);
   FEditando := False;
+end;
+
+procedure Tfrm_principal_cadRTTI.FormDestroy(Sender: TObject);
+var
+  c: TCliente;
+begin
+  TDados.Free;
+  //A lista e dona dos objetos clientes: libera cada um antes da lista
+  for c in FClientes do
+    c.Free;
+  FClientes.Free;
 end;
 
 procedure Tfrm_principal_cadRTTI.FormShow(Sender: TObject);
 begin
-  TDados.GetListDaBase<TCliente>(FClientes);
+  TDados.GetListDaBase(FClientes);
   atualizaGrid;
   ControleDeBotoes;
 
@@ -162,9 +188,10 @@ begin
   i := StringGrid.Row;
   c := GetRegistroFromClienteList(i);
 
-  TDados.delete(c);
+  TDados.Delete(c);
   //Remove da lista de Objetos
   FClientes.Remove(c);
+  c.Free;
   atualizaGrid(i);
 end;
 
@@ -203,7 +230,7 @@ begin
   StringGrid.Cols[3].Clear;
 
   //Titulos Colunas
-  StringGrid.Rows[0].Add('Código');
+  StringGrid.Rows[0].Add('CÃ³digo');
   StringGrid.Rows[0].Add('Nome');
   StringGrid.Rows[0].Add('Idade');
   StringGrid.Rows[0].Add('Peso');

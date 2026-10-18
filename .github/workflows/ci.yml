@@ -1,0 +1,41 @@
+﻿name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nenhum binario, compilado ou credencial versionado
+        run: |
+          set -e
+          bloqueados=$(git ls-files | grep -E '\.(dcu|identcache|dproj\.local|dll|dylib)$|__history/|(^|/)config\.ini$|(^|/)planejamento\.md$' || true)
+          if [ -n "$bloqueados" ]; then
+            echo "Arquivos que nao devem ser versionados:"; echo "$bloqueados"; exit 1
+          fi
+
+      - name: Fontes Pascal em UTF-8 com BOM
+        run: |
+          set -e
+          falhas=0
+          for f in $(git ls-files '*.pas' '*.dpr'); do
+            if [ "$(head -c 3 "$f" | od -An -tx1 | tr -d ' \n')" != "efbbbf" ]; then
+              echo "Sem BOM UTF-8: $f"; falhas=1
+            fi
+          done
+          exit $falhas
+
+      - name: SQL sem concatenacao de valores
+        run: |
+          set -e
+          # Valores devem ir por parametro (:campo). Format() de SQL com %s e permitido
+          # apenas para nomes de tabela/colunas vindos dos atributos.
+          if git grep -nE "(INSERT|UPDATE|DELETE|SELECT)[^']*'\s*\+" -- '*.pas'; then
+            echo "Possivel SQL concatenado encontrado (use parametros)."; exit 1
+          fi

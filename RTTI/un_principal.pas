@@ -1,4 +1,4 @@
-unit un_principal;
+Ôªøunit un_principal;
 
 interface
 
@@ -56,7 +56,7 @@ begin
   //Cria contexto (formCreate)
   //Tipo = qual contexto/valor temos em (Tipo de Classe)
 
-  {Sender = Classe do Bot„o}
+  {Sender = Classe do Bot√£o}
   Tipo := Contexto.GetType(Sender.ClassType);
 
   //Adicionamos o Nome da classe
@@ -123,7 +123,7 @@ begin
 
   for Cliente in ListaClientes do
     TValidadorCustom.ValidarClasse(Cliente,sList);
-    //Passo a Classe que ser· validad e uma list pra capturar os retornos(msg)
+    //Passo a Classe que ser√° validad e uma list pra capturar os retornos(msg)
 
   {Listbox vai apresentar a listagem de erros/problemas do stringlist usado
   armazenar;}
@@ -145,13 +145,13 @@ begin
    //TRTTIContext > Busca Contexto para fazer a ponte entre classe e metodos disponiveis
    Contexto            := TRTTIContext.Create;
 
-   //TRTTIType > Libera acessos a diversos mÈtodos a classe reletida
+   //TRTTIType > Libera acessos a diversos m√©todos a classe reletida
    Tipo                := TRTTIType.Create;
 
    //Para ter acesso as Proporiedades do Objeto
 //   Proper              := TRTTIproperty.Create;
 
-   //Para ter acesso as MÈtodos do Objeto
+   //Para ter acesso as M√©todos do Objeto
    Metod               := TRTTiMethod.Create;
 end;
 
